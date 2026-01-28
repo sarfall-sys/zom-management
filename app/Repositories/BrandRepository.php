@@ -50,7 +50,7 @@ class BrandRepository implements BaseRepository
 
         $brand->update($attributes);
 
-        return $brand->fresh();
+        return $brand->refresh();
     }
 
     public function delete($id)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::apiResource('/users', AdminController::class);
         Route::get('/roles', [AdminController::class, 'getRoles']);
+        Route::get('/userStats', [DashboardController::class, 'userStats']);
+        Route::get('/productStats', [DashboardController::class, 'productStats']);
     });
 
 });

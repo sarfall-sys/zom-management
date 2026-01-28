@@ -19,7 +19,4 @@ class BannerController extends Controller
         return $this->bannerRepository->activeBanners();
 
     }
-
-
-
 }

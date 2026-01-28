@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+
 class ProductController extends Controller
 {
     protected $productRepository;
@@ -18,27 +18,30 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-        return $this->productRepository->all($request);
+        $products = $this->productRepository->all($request->all());
+        return  ProductResource::collection($products);
     }
 
     public function store(StoreProductRequest $request)
     {
-        return $this->productRepository->create($request->validated());
+        $product = $this->productRepository->create($request->validated());
+        return new ProductResource($product);
     }
     public function show( $id)
     {
-        return $this->productRepository->find($id);
+        return new ProductResource($this->productRepository->find($id));
     }
     public function update(UpdateProductRequest $request, $id)
     {
-        return $this->productRepository->update($id, $request->validated());
+        $product = $this->productRepository->update($id, $request->validated());
+        return new ProductResource($product);
     }
 
     public function destroy($id)
     {
         $this->authorize('admin-actions');
-        return $this->productRepository->delete($id);
+
+        $deleted = $this->productRepository->delete($id);
+        return new ProductResource($deleted);
     }
-
-
 }

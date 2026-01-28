@@ -20,7 +20,7 @@ class AdminController extends Controller
 
     protected $roleRepository;
 
-    public function __construct(UserRepository $userRepository, ProductRepository $productRepository, RoleRepository $roleRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
 

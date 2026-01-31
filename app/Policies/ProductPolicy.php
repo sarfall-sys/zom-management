@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 
 class ProductPolicy
 {
@@ -14,7 +14,7 @@ class ProductPolicy
     public function viewAny(User $user): bool
     {
         //
-        return $user->role_id === 1 || $user->role_id === 2 || $user->role_id === 3;
+        return Gate::allows('manage-products');
     }
 
     /**
@@ -23,6 +23,7 @@ class ProductPolicy
     public function view(User $user, Product $product): bool
     {
         //
+        
         return $user->role_id === 1 || $user->role_id === 2 || $user->role_id === 3;
     }
 
@@ -31,8 +32,8 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        //
-        return $user->role_id === 1 || $user->role_id === 3;
+        return $user->role_id === User::ROLE_ADMIN || $user->role_id === User::ROLE_MANAGER;
+
     }
 
     /**
@@ -41,7 +42,7 @@ class ProductPolicy
     public function update(User $user, Product $product): bool
     {
         //
-        return $user->role_id === 1 || $user->role_id === 3;
+        return $user->role_id === User::ROLE_ADMIN || $user->role_id === User::ROLE_MANAGER;
     }
 
     /**
@@ -49,8 +50,8 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        //
-        return $user->role_id === 1 ;
+        // just admin
+        return $user->role_id === User::ROLE_ADMIN;
     }
 
     /**
@@ -59,7 +60,7 @@ class ProductPolicy
     public function restore(User $user, Product $product): bool
     {
         //
-        return $user->role_id === 1 || $user->role_id === 3;
+        return $user->role_id === User::ROLE_ADMIN;
     }
 
     /**
@@ -68,6 +69,6 @@ class ProductPolicy
     public function forceDelete(User $user, Product $product): bool
     {
         //
-        return $user->role_id === 1 ;
+        return $user->role_id === User::ROLE_ADMIN;
     }
 }

@@ -63,7 +63,9 @@ class BrandRepository implements BaseRepository
 
     public function getNameBrand()
     {
-        $brands = Brand::query()->select('id', 'name')->get();
+        $brands = Brand::query()->select('id', 'name')
+            ->orderBy('name', 'asc')
+            ->get();
 
         return response()->json($brands, 200);
     }

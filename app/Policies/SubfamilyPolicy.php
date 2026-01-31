@@ -14,6 +14,7 @@ class SubfamilyPolicy
     public function viewAny(User $user): bool
     {
         //
+        return $user->role_id === 1 || $user->role_id === 2 || $user->role_id === 3;
     }
 
     /**
@@ -22,6 +23,7 @@ class SubfamilyPolicy
     public function view(User $user, Subfamily $subfamily): bool
     {
         //
+        return $user->role_id === 1 || $user->role_id === 2 || $user->role_id === 3;
     }
 
     /**
@@ -30,6 +32,7 @@ class SubfamilyPolicy
     public function create(User $user): bool
     {
         //
+        return $user->role_id === User::ROLE_ADMIN || $user->role_id === User::ROLE_MANAGER;
     }
 
     /**
@@ -38,6 +41,7 @@ class SubfamilyPolicy
     public function update(User $user, Subfamily $subfamily): bool
     {
         //
+        return $user->role_id === User::ROLE_ADMIN || $user->role_id === User::ROLE_MANAGER;
     }
 
     /**
@@ -46,6 +50,7 @@ class SubfamilyPolicy
     public function delete(User $user, Subfamily $subfamily): bool
     {
         //
+        return $user->role_id === User::ROLE_ADMIN;
     }
 
     /**
@@ -54,6 +59,7 @@ class SubfamilyPolicy
     public function restore(User $user, Subfamily $subfamily): bool
     {
         //
+        return $user->role_id === User::ROLE_ADMIN;
     }
 
     /**
@@ -62,5 +68,6 @@ class SubfamilyPolicy
     public function forceDelete(User $user, Subfamily $subfamily): bool
     {
         //
+        return $user->role_id === User::ROLE_ADMIN;
     }
 }

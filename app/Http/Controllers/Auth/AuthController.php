@@ -70,6 +70,7 @@ class AuthController extends Controller
     {
         Log::info('Fetching authenticated user', [
             'user' => $request->user(),
+            
         ]);
 
         return response()->json($request->user());

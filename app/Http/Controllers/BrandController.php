@@ -72,6 +72,7 @@ class BrandController extends Controller
     public function getBrandNames()
     {
         $this->authorize('viewAny', Brand::class);
+        
         $brandNames = $this->brandRepository->getNameBrand();
 
         return $brandNames;

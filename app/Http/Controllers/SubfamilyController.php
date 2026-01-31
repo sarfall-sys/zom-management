@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subfamily;
 use App\Http\Requests\StoreSubfamilyRequest;
 use App\Http\Requests\UpdateSubfamilyRequest;
-use Illuminate\Http\Request;
+use App\Models\Subfamily;
 use App\Repositories\SubfamilyRepository;
+use Illuminate\Http\Request;
+
 class SubfamilyController extends Controller
 {
     protected $subfamilyRepository;
@@ -15,21 +16,18 @@ class SubfamilyController extends Controller
     {
         $this->subfamilyRepository = $subfamilyRepository;
     }
+
     public function index(Request $request)
     {
         return $this->subfamilyRepository->all($request);
     }
 
-    public function getSubfamilyNames()
-    {
-        return $this->subfamilyRepository->getNameSubfamily();
-    }
     public function store(StoreSubfamilyRequest $request)
     {
         return $this->subfamilyRepository->create($request->validated());
     }
 
-    public function show( $id)
+    public function show($id)
     {
         return $this->subfamilyRepository->find($id);
     }
@@ -42,5 +40,12 @@ class SubfamilyController extends Controller
     public function destroy($id)
     {
         return $this->subfamilyRepository->delete($id);
+    }
+
+    public function getSubfamilyNames()
+    {
+        $this->authorize('viewAny', Subfamily::class);
+
+        return $this->subfamilyRepository->getNameSubfamily();
     }
 }

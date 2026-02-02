@@ -100,10 +100,10 @@ The project currently manages 10+ core tables such as Products, Families, Users,
 |--------|----------|-------------|------|
 | POST | `/login` | Login and get token | ❌ |
 | POST | `/logout` | Logout user | ✔️ |
-| GET | `/api/products` | List products | ✔️ |
-| POST | `/api/products` | Create product | ✔️ Admin |
-| PUT | `/api/products/{id}` | Update product | ✔️ Admin |
-| DELETE | `/api/products/{id}` | Delete product | ✔️ Admin |
+| GET | `/api/users` | List user | ✔️ Admin |
+| POST | `/api/users` | Create user | ✔️ Admin |
+| PUT | `/api/users/{id}` | Update user | ✔️ Admin |
+| DELETE | `/api/users/{id}` | Delete product | ✔️ Admin |
 
 ---
 ## 🧪 Running Tests

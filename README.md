@@ -6,53 +6,151 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+# Management System API – Laravel Sanctum
 
-### Management System API – Laravel Sanctum
+A RESTful API built with **Laravel Sanctum** for secure authentication, following the **MVC architecture** enhanced with the **Repository Pattern**.  
+The system includes an **admin panel**, **policies & gates**, custom **middleware**, **form requests**, **API resources**, **seeders**, **factories**, and **PHP Feature Tests**.
 
-A RESTful API built with Laravel Sanctum for secure authentication, following MVC architecture enhanced with the Repository Pattern.
-The system includes an admin panel, authorization through Policies & Gates, middleware, form Requests, API Resources, Seeders, Factories, and PHP Feature Tests.
-
-It currently manages 10+ core tables such as Products, Families, Users, Roles, etc.
-Future expansions include Inventory and additional business modules.
-
-## Features
-
-#Authentication & Security
-
-Token authentication using Laravel Sanctum
-
-Login & logout endpoints
-
-Protected routes and role-based access
-
-#Authorization
-Policies for resource-level permissions
-
-Gates for global / custom checks
-
-Role & Permission structure included
-
-#Architecture
-Standard MVC structure
-
-Repository Pattern for clean and scalable data access
-
-Request Validation
-
-API Resources for consistent JSON formatting
-
-#Admin Panel
-
-Manage users, roles, products, families, and other modules
-
-#Database Setup
-Factories to generate fake test data
-Seeders to create:
-Default Admin User
-Product Families & Sample Products
-Any other initial data
-
-#Testing
+The project currently manages 10+ core tables such as Products, Families, Users, Roles, and more. Future expansions include an Inventory module and additional business features.
 
 ---
-## Current Modules
+
+## 🚀 Features
+
+### 🔐 Authentication & Security
+- Token-based authentication using **Laravel Sanctum**
+- Login & logout functionality
+- Protected routes with role-based access
+
+### 🛡 Authorization
+- **Policies** for resource-level access
+- **Gates** for global permission checks
+- Role & permission structure (e.g., Admin, User)
+
+### 🧱 Architecture
+- Standard **Laravel MVC**
+- **Repository Pattern** for clean data handling
+- Form **Request Validation**
+- **API Resource Transformers** for consistent JSON responses
+
+### 🖥 Admin Panel
+- Management of Users, Roles, Products, Families, etc.
+
+### 🌱 Database: Seeders & Factories
+- **Factories** for generating test data (Users, Products, Families, etc.)
+- **Seeders** for:
+  - Default admin user
+  - Roles
+  - Permissions (optional)
+  - Product families
+  - Example products
+  - Additional initial data
+
+### 🧪 Testing
+- **PHPUnit Feature Tests** covering:
+  - Authentication
+  - CRUD operations
+  - Policies & Gates
+  - Database interaction via factories
+
+---
+
+## 📦 Current Modules
+
+- Users  
+- Roles  
+- Products  
+- Families  
+- Categories (optional)  
+- Permissions (optional)  
+- Logs (optional)  
+- Settings (optional)  
+- Sanctum Tokens  
+- Other related tables
+
+### 📌 Planned Upcoming Modules
+- Inventory
+- Stock Movements
+- Suppliers
+- Purchase Orders
+- Reports & Admin tools
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | Laravel 10+ |
+| Authentication | Laravel Sanctum |
+| Database | MySQL / MariaDB |
+| Testing | PHPUnit |
+| Data Generation | Factories & Seeders |
+| Architecture | MVC + Repository Pattern |
+| Admin Panel | Blade / Livewire (or your preferred setup) |
+
+---
+
+## 🔐 Authentication Flow
+
+1. User submits email & password  
+2. Sanctum generates a token  
+3. Token is used for protected routes  
+4. Policies & gates validate permissions  
+5. Middleware enforces access control
+
+---
+## 📚 Example API Endpoints
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/login` | Login and get token | ❌ |
+| POST | `/logout` | Logout user | ✔️ |
+| GET | `/api/products` | List products | ✔️ |
+| POST | `/api/products` | Create product | ✔️ Admin |
+| PUT | `/api/products/{id}` | Update product | ✔️ Admin |
+| DELETE | `/api/products/{id}` | Delete product | ✔️ Admin |
+
+---
+## 🧪 Running Tests
+
+Run all tests:
+## 🧪 Running Tests
+
+Run all tests:
+
+php artisan test
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+git clone https://github.com/your-repo-url.git
+
+cd project-folder
+
+### 2. Install dependencies
+
+composer install
+
+### 3. Configure environment file
+cp .env.example .env
+php artisan key:generate
+
+
+### 4. Setup the database
+php artisan migrate --seed
+
+### 5. Start the development server
+
+
+---
+
+## 📝 License
+This project is licensed under the **MIT License** (or your chosen license).
+
+---
+
+

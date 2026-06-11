@@ -70,10 +70,30 @@ class AuthController extends Controller
     {
         Log::info('Fetching authenticated user', [
             'user' => $request->user(),
-            
+
         ]);
 
         return response()->json($request->user());
 
+    }
+
+    public function dashboard()
+    {
+        $this->authorize('view', User::class);
+
+        return response()->json([
+            'message' => 'Welcome to the dashboard',
+            'user' => Auth::user(),
+        ]);
+    }
+
+    public function adminDashboard()
+    {
+        $this->authorize('access-admin');
+
+        return response()->json([
+            'message' => 'Welcome to the admin dashboard',
+            'user' => Auth::user(),
+        ]);
     }
 }

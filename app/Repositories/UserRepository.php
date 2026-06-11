@@ -3,7 +3,6 @@
 namespace App\Repositories;
 use App\Models\User;
 use App\Interfaces\BaseRepository;
-use App\Http\Resources\UserResource;
 use App\Models\Role;
 
 class UserRepository implements BaseRepository
@@ -15,8 +14,7 @@ class UserRepository implements BaseRepository
         if (! empty($filters['search'])) {
             $query->where(function ($q) use ($filters) {
                 $q->where('name', 'like', '%'.$filters['search'].'%')
-                    ->orWhere('description', 'like', '%'.$filters['search'].'%');
-            });
+                    ->orWhere('email', 'like', '%'.$filters['search'].'%');});
         }
 
         // Sort

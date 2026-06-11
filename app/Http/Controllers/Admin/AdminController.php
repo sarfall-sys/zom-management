@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FieldRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Repositories\ProductRepository;
-use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -28,7 +26,11 @@ class AdminController extends Controller
 
     public function index(FieldRequest $request)
     {
-        return $this->userRepository->all($request->validated());
+        $this->authorize('view', User::class);
+        $user = $this->userRepository->all($request->validated());
+
+        return UserResource::collection($user);
+
     }
 
     public function show(User $user)
@@ -55,5 +57,4 @@ class AdminController extends Controller
     {
         return $this->userRepository->getRoles();
     }
-
 }

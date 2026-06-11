@@ -8,7 +8,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\Role;
 use App\Repositories\ProductRepository;
-use Illuminate\Http\Request;
+use App\Http\Requests\FieldRequest;
 
 class ProductController extends Controller
 {
@@ -20,7 +20,7 @@ class ProductController extends Controller
         //  $this->authorizeResource(Product::class, 'product');
     }
 
-    public function index(Request $request)
+    public function index(FieldRequest $request)
     {
         $this->authorize('view-any', Product::class);
         $products = $this->productRepository->all($request->all());
@@ -47,17 +47,17 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $this->authorize('update', Product::class);
+        $this->authorize('update', $product);
         $product = $this->productRepository->update($product->id, $request->validated());
 
         return new ProductResource($product);
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $this->authorize('delete', Product::class);
+        $this->authorize('delete', $product);
 
-        $deleted = $this->productRepository->delete($id);
+        $deleted = $this->productRepository->delete($product->id);
 
         return new ProductResource($deleted);
     }
@@ -70,11 +70,4 @@ class ProductController extends Controller
         return response()->json($roles);
     }
 
-    public function getSubfamilies()
-    {
-        $this->authorize('view-any', Product::class);
-        $subfamilies = \App\Models\Subfamily::select('id', 'name')->get();
-
-        return response()->json($subfamilies);
-    }
 }

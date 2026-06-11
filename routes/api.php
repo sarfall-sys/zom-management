@@ -29,12 +29,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/subfamily-names', [\App\Http\Controllers\SubfamilyController::class, 'getSubfamilyNames']);
     // Admin only API
     Route::middleware('can:access-admin')->prefix('admin')->group(function () {
-
+        Route::get('/users/stats', [DashboardController::class, 'userStats']);
+        Route::get('/dashboard', [\App\Http\Controllers\Auth\AuthController::class, 'adminDashboard']);
         Route::apiResource('/users', AdminController::class);
-        Route::get('/roles', [AdminController::class, 'getRoles']);
-        Route::get('/userStats', [DashboardController::class, 'userStats']);
-        Route::get('/productStats', [DashboardController::class, 'productStats']);
-        Route::get('/roles', [\App\Http\Controllers\ProductController::class, 'getRoles']);
+        Route::get('/roles/names', [AdminController::class, 'getRoles']);
+        Route::get('/products/stats', [DashboardController::class, 'productStats']);
+        Route::get('/products/brand/chart',[DashboardController::class ,'productsPerBrand']);
+        Route::get('/products/subfamily/chart',[DashboardController::class ,'productsPerSubfamily']);
 
     });
 

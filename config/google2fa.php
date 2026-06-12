@@ -57,7 +57,7 @@ return [
     /*
      * One Time Password View.
      */
-    'view' => 'google2fa.index',
+    'view' => 'auth.2fa_verify', #View to show when the user needs to verify the OTP
 
     /*
      * One Time Password error message.
